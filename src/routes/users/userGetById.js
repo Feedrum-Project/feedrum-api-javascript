@@ -13,16 +13,16 @@ let validId = (id) => {
 }
 
 let userGetById = async (req, res) => {
-	if(!req.params["id"])
+	if(!req.query["id"])
 		return res.status(400).send({code: "E_INVALID_PARAMETERS", msg: "`id` parameter apsend"});
 
-	if(!validId(req.params["id"]))
+	if(!validId(req.query["id"]))
 		return res.status(400).send({code: "E_INVALID_PARAMETERS", msg: "`id` is broken"});
 
 	let user;
 	
 	try {
-		user = await UserModel.findOne({id: req.params["id"]});
+		user = await UserModel.findOne({id: req.query["id"]});
 	} catch (e) {
 		console.log(e);
 		return res.status(500).send({code: "E_SERVER_INTERNAL", msg: "couldn't get user"});

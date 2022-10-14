@@ -10,7 +10,7 @@ const {deleteUser} = require("./userDelete");
 const {loginUser} = require("./userLogin");
 const {getUsers} = require("./usersGet");
 
-
+const {singInCheckMiddleware, adminSingedIn} = require("../../middlewares");
 
 
 let userRoutes = new Router();
@@ -19,13 +19,13 @@ userRoutes
 	.post("/useradd", createUser);
 
 userRoutes
-	.post("/userupdate", updateUser);
+	.post("/userupdate", adminSingedIn ,updateUser);
 
 userRoutes
-	.delete("/userdelete", deleteUser);
+	.delete("/userdelete", adminSingedIn, deleteUser);
 
 userRoutes
-	.get("/",  getUsers);
+	.get("/", singInCheckMiddleware ,getUsers);
 
 userRoutes
 	.get("/user/verifyEmailLink", sendEmailVerifyLink);
@@ -37,7 +37,7 @@ userRoutes
 	.get("/user/login", loginUser);
 
 userRoutes
-	.get("/user/:id", getUserById);
+	.get("/user/:id", singInCheckMiddleware, getUserById);
 
 
 

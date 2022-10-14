@@ -1,9 +1,11 @@
-const User = require("./UserModel");
 const Verify = require("./VerifyTokenModel");
+const Admin = require("./AdminModel");
+const User = require("./UserModel");
 
 const {connect} = require("mongoose");
 
 module.exports = {
-	UserModel: User,
-	VerifyTokenModel: Verify
+	VerifyTokenModel: Verify,
+	AdminModel: Admin,
+	UserModel: User
 };
