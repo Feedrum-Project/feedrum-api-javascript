@@ -37,6 +37,8 @@ let userLogin = async (req, res) => {
 		return res.status(500).send({code: "E_SERVER_INTERNAL", msg: "couldn't get user"});
 	}
 
+	if (!user)
+		return res.status(404).send({code: "E_NOT_EXIST", msg: "couldn't find user"});
 
 	if (!(user._doc.ACCOUNT_VERIFYED_EMAIL))
 		return res.status(403).send({code: "E_NOT_EXIST", msg: "verify you email"});
@@ -50,14 +52,14 @@ let userLogin = async (req, res) => {
 		if (!result)
 			return res.status(400).send({code: "E_INVALID_BODY", msg: "passwords don't identity"});
 
-		let {ACCOUNT_HASHED_PASSWORD, ...userPayload} = user;
+		let {ACCOUNT_HASHED_PASSWORD, ...userPayload} = user._doc;
 
 
-		let token = await jwt.sign(userPayload, process.env.USER_SECRET, {expiresIn: process.env.TOKEN_EXPIREAT});
-		let refreshToken = await jwt.sign(userPayload, process.env.USER_SECRET, {expiresIn: process.env.TOKEN_EXPIREAT});
+		let token = await jwt.sign(userPayload, process.env.USER_SECRET, {expiresIn: Number(process.env.TOKEN_EXPIREAT)});
+		let refreshToken = await jwt.sign(userPayload, process.env.USER_REFRESH_SECRET, {expiresIn: Number(process.env.TOKEN_EXPIREAT) + 86400000});
 
-		res.cookie("userTok", token, {maxAge: process.env.TOKEN_EXPIREAT});
-		res.cookie("refreshUserTok", refreshToken, {maxAge: process.env.TOKEN_EXPIREAT});
+		res.cookie("userTok", token, {maxAge: Number(process.env.TOKEN_EXPIREAT)});
+		res.cookie("refreshUserTok", refreshToken, {maxAge: Number(process.env.TOKEN_EXPIREAT) + 86400000});
 
 		res.send("logged succesfull")
 

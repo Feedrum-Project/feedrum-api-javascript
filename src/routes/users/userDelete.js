@@ -34,5 +34,5 @@ let userDelete = async (req, res) => {
 }
 
 module.exports = {
-	deleteUser: userDelete
+	deleteUsers: userDelete
 }

@@ -171,5 +171,5 @@ let userUpdate = async (req, res) => {
 }
 
 module.exports = {
-	updateUser: userUpdate
+	updateUsers: userUpdate
 }
