@@ -1,8 +1,15 @@
-# saily-api
+# Feedrum API repo
 
-RESTful API of Saily.
+It's repository, what contains code of Feedrum's RESTful API.
 
-# Endpoints
+### in first time base repo for hosting RESful API
 
-![image](https://user-images.githubusercontent.com/60889521/196004319-d52be67c-e26a-4e66-8464-1646bb81c9ff.png)
+
+Technologies, used for building it:
+- Node.js (serverless side)
+- Express (MVC library)
+- MongoDB (DBMS) (May migrate to PostgreSQL)
+- Mongoose (ORM system for MongoDB)
+- Bcrypt (Hashing password)
+
 
