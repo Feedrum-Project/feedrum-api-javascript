@@ -10,8 +10,12 @@ const routes = require("./routes/index");
 let app = express();
 
 config();
-
-connect(process.env.MONGO_CONNECT_URL);
+try {
+	connect(process.env.MONGO_CONNECT_URL);
+} catch (e) {
+	console.log(e);
+	app.use((req, res) => res.status(500).send({code: "E_SERVER_INTERNAL", msg: "couldn't connect to database"}))
+}
 
 app.use(cookieParser());
 
@@ -19,4 +23,9 @@ app.use(bodyParser.json());
 
 app.use(routes);
 
-app.listen(process.env.PORT || 3000);
+try {
+	app.listen(process.env.PORT || 3000);
+} catch (e) {
+	console.log(e);
+	app.use((req, res) => res.status(500).send({code: "E_SERVER_INTERNAL", msg: "smth went wrong"}));
+}

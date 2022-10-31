@@ -3,30 +3,32 @@ const {ObjectId} = require("mongoose").Types;
 const {emailTransporter} = require("../../utils");
 const {UserModel, VerifyTokenModel} = require("../../models");
 
+const {validId} = require("../../utils").validations;
 
-let validId = (id) => { 
-    if(ObjectId.isValid(id)){
+// let validId = (id) => { 
+//     if(ObjectId.isValid(id)){
 
-        if((String)(new ObjectId(id)) === id)
-            return true;       
+//         if((String)(new ObjectId(id)) === id)
+//             return true;       
 
-        return false;
-    }
+//         return false;
+//     }
 
-    return false;
-}
+//     return false;
+// }
 
 let sendEmailVerifyLink = async (req, res) => {
-	if (Object.keys(req.body).length == Object.keys({}).length)
+	let {decoded, ...body} = req.body
+	if (Object.keys(body).length == Object.keys({}).length)
 		return res.status(400).send({code: "E_INVALID_BODY", msg: "body has not be empty"});
 
-	if (validId(req.body.ACCOUNT_ID) == false)
+	if (validId(body.ACCOUNT_ID) == false)
 		return res.status(400).send({code: "E_INVALID_BODY", msg: "`ACCOUNT_ID` is broken"});
 
 	let user;
 	
 	try {
-		user = await UserModel.findOne({_id: req.body.ACCOUNT_ID});
+		user = await UserModel.findOne({_id: body.ACCOUNT_ID});
 	} catch (e) {
 		return res.status(500).send({code: "E_SERVER_INTERNAL", msg: "couldn't get user"});
 	}

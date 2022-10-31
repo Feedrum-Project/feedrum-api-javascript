@@ -6,6 +6,7 @@ const {sendEmailVerifyLink} = require("./sendEmailVerifyLink");
 const {refreshUserToken} = require("./userTokenRefresh");
 const {emailVerifing} = require("./emailVerifing");
 const {deleteUser} = require("./user/userDelete");
+const {updateUser} = require("./user/userUpdate");
 const {getUserById} = require("./userGetById");
 const {updateUsers} = require("./userUpdate");
 const {deleteUsers} = require("./userDelete");
@@ -14,16 +15,19 @@ const {logoutUser} = require("./userLogout");
 const {loginUser} = require("./userLogin");
 const {getUsers} = require("./usersGet");
 
-const {singInCheckMiddleware, adminSingedIn} = require("../../middlewares");
+const {singInCheckMiddleware, userNotSigned, adminSingedIn} = require("../../middlewares");
 
 
 let userRoutes = new Router();
 
 userRoutes
-	.post("/useradd", createUser);
+	.post("/useradd",userNotSigned, createUser);
 
 userRoutes
 	.post("/userupdate", adminSingedIn ,updateUsers);
+
+userRoutes
+	.post("/user/update", singInCheckMiddleware, updateUser);
 
 userRoutes
 	.delete("/userdelete", adminSingedIn, deleteUsers);
@@ -35,10 +39,10 @@ userRoutes
 	.get("/user/verifyEmailLink", sendEmailVerifyLink);
 
 userRoutes
-	.get("/user/email/verify", emailVerifing);
+	.get("/user/email/verify",  emailVerifing);
 
 userRoutes
-	.get("/user/login", loginUser);
+	.get("/user/login",userNotSigned, loginUser);
 
 userRoutes
 	.get("/user/login/refresh", singInCheckMiddleware,refreshUserToken);
@@ -51,9 +55,6 @@ userRoutes
 
 userRoutes
 	.get("/user/:id", singInCheckMiddleware, getUserById);
-
-
-
 
 
 

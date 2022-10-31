@@ -23,7 +23,9 @@ module.exports = async (req, res, next) => {
 			return res.status(500).send({code: "E_SERVER_INTERNAL", msg: "cannot check account valid"})
 		}
 
-		req.body.decoded = decoded;
+		let {exp, iat, ...decode} = decoded;
+
+		req.body.decoded = decode;
 
 		
 	});

@@ -1,16 +1,8 @@
 const {ObjectId} = require("mongoose").Types;
 
 const {UserModel} = require("../../models");
+const {validId} = require("../../utils");
 
-let validId = (id) => {
-     
-    if(ObjectId.isValid(id)){
-        if((String)(new ObjectId(id)) === id)
-            return true;       
-        return false;
-    }
-    return false;
-}
 
 let userGetById = async (req, res) => {
 	if(!req.query["id"])

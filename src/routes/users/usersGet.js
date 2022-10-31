@@ -15,11 +15,11 @@ let usersGet = async (req, res) => {
 			if (!(limit % 10 == 0) || (limit == 0))
 				return res.status(400).send({code: "E_INVALID_BODY", msg: "`limit` shouldn't be a zero or have remainder"});
 
-			let users = await UserModel.find().sort({'ACCOUNT_CREATEDAT_TIMESTAMP': -1}).limit(limit);
-
-			if(users instanceof Error){
-				console.log(users);
-				return res.status(500).send({code: "E_SERVER_INTERNAL", msg: "couldn't get users"});
+			try {
+				let users = await UserModel.find().sort({'ACCOUNT_CREATEDAT_TIMESTAMP': -1}).limit(limit);
+			} catch (e) {
+				console.log(e);
+				return res.status(500).send({code: "E_SERVER_INTERNAL", msg: "couldn't create list of users"})
 			}
 
 			users.forEach(el => {
@@ -31,12 +31,13 @@ let usersGet = async (req, res) => {
 
 	}
 
-	let users = await UserModel.find().sort({'ACCOUNT_CREATEDAT_TIMESTAMP': -1}).limit(10);
-
-	if(users instanceof Error){
-		console.log(users);
-		return res.status(500).send({code: "E_SERVER_INTERNAL", msg: "couldn't get users"});
+	try {
+		let users = await UserModel.find().sort({'ACCOUNT_CREATEDAT_TIMESTAMP': -1}).limit(10);
+	} catch (e) {
+		console.log(e);
+		return res.status(500).send({code: "E_SERVER_INTERNAL", msg: "couldn't create list of users"});
 	}
+
 
 	users.forEach(el => {
 		delete el._doc.ACCOUNT_HASHED_PASSWORD;

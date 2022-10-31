@@ -2,10 +2,13 @@ const {config} = require("dotenv");
 
 const checkUserSinged = require("./checkUserSinged");
 const checkAdminSinged = require("./checkAdminSinged");
+const checkUserNotSigned = require("./checkUserNotSigned")
 
 config();
 
 module.exports = {
 	singInCheckMiddleware: checkUserSinged,
-	adminSingedIn: checkAdminSinged
+	userNotSigned: checkUserNotSigned,
+	adminSingedIn: checkAdminSinged,
+
 }

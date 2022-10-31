@@ -1,19 +1,23 @@
 const bcrypt = require("bcrypt");
 const uuid = require("uuid").v4;
 
-const {UserModel, VerifyTokenModel} = require("../../models/");
 const emailValidation = require("node-email-validation");
 
-let validEmail = (email) => {
-	return emailValidation.is_email_valid(email);
-}
+const {UserModel, VerifyTokenModel} = require("../../models/");
+const {validEmail} = require("../../utils").validations;
+
+// let validEmail = (email) => {
+// 	return emailValidation.is_email_valid(email);
+// }
 
 let createUser = async (req, res) => {
-	if (Object.keys(req.body).length == Object.keys({}).length) return res.status(400).send({code: "E_INVALID_BODY", msg: "body has not be empty"});
-	if (!(req.body.ACCOUNT_NAME) || (req.body.ACCOUNT_NAME == "")) return res.status(400).send({code: "E_INVALID_BODY", msg: "body don't contains `ACCOUNT_NAME`"});
-	if(!(req.body.ACCOUNT_EMAIL) || (req.body.ACCOUNT_EMAIL == "")) return res.status(400).send({code: "E_INVALID_BODY", msg: "body don't contains `ACCOUNT_EMAIL`"});
-	if(!(req.body.ACCOUNT_PASSWORD) || (req.body.ACCOUNT_PASSWORD == "")) return res.status(400).send({code: "E_INVALID_BODY", msg: "body don't contains `ACCOUNT_PASSWORD`"});
-	let {ACCOUNT_NAME, ACCOUNT_EMAIL, ACCOUNT_PASSWORD} = req.body;
+	let {userSigned, ...body} = req.body
+	
+	if (Object.keys(body).length == Object.keys({}).length) return res.status(400).send({code: "E_INVALID_BODY", msg: "body has not be empty"});
+	if (!(body.ACCOUNT_NAME) || (body.ACCOUNT_NAME == "")) return res.status(400).send({code: "E_INVALID_BODY", msg: "body don't contains `ACCOUNT_NAME`"});
+	if(!(body.ACCOUNT_EMAIL) || (body.ACCOUNT_EMAIL == "")) return res.status(400).send({code: "E_INVALID_BODY", msg: "body don't contains `ACCOUNT_EMAIL`"});
+	if(!(body.ACCOUNT_PASSWORD) || (body.ACCOUNT_PASSWORD == "")) return res.status(400).send({code: "E_INVALID_BODY", msg: "body don't contains `ACCOUNT_PASSWORD`"});
+	let {ACCOUNT_NAME, ACCOUNT_EMAIL, ACCOUNT_PASSWORD} = body;
 	ACCOUNT_PASSWORD = ACCOUNT_PASSWORD.trim();
 	ACCOUNT_NAME = ACCOUNT_NAME.trim();
 	ACCOUNT_EMAIL = ACCOUNT_EMAIL.trim();

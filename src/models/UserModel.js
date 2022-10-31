@@ -27,7 +27,7 @@ let userScheme = new Schema({
 	},
 	ACCOUNT_RANK: {
 		type: Number,
-		default: 1
+		default: 0
 	},
 	ACCOUNT_RANKED_BY: {
 		type: [ObjectId],
@@ -65,8 +65,6 @@ module.exports = User = model("Users", userScheme);
 User.addUser = async (user) => {
 	if (typeof user != 'object') return Error("`user` not be a object");
 	if (Object.keys(user).length == Object.keys({}).length) return Error("`user` has not be empty");
-
-	let {ACCOUNT_NAME, ACCOUNT_EMAIL} = user;
 
 	let userToSave = new User(user);
 	try {

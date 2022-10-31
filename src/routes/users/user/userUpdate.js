@@ -1,34 +1,35 @@
 const emailValidation = require("node-email-validation");
 const {ObjectId} = require("mongoose").Types;
 
-const {validId, validEmail} = require("../../utils").validations;
-const {userUpdateParams} = require("../../utils");
-const {UserModel} = require("../../models/");
+const {validId, validEmail} = require("../../../utils").validations;
+const {userUpdateParams} = require("../../../utils");
 
 
 let userUpdate = async (req, res) => {
-	let {decoded, ...body} = req.body;
-	if (Object.keys(body).length == Object.keys({}).length) return res.status(400).send({code: "E_INVALID_BODY", msg: "body has not be empty"});
-	if (!(body.ACCOUNT_ID)) return res.status(400).send({code: "E_INVALID_BODY", msg: "body don't contains `ACCOUNT_ID`"});
-	if(!(validId(body.ACCOUNT_ID))) return res.status(400).send({code: "E_INVALID_BODY", msg: "`ACCOUNT_ID` is invalid"});
+	if (!req.body)
+		return res.status(400).send({code: "E_INVALID_BODY", msg: "body has not be empty"});
 
-	let {ACCOUNT_ID, ...updateData} = body;
 	
-	if(Object.keys(updateData).length == Object.keys({}).length)
+	// let {decoded, ...updateData} = req.body;
+	// console.log(decoded, updateData)
+
+	if(Object.keys(req.body).length == Object.keys({}).length)
 		return res.status(400).send({code: "E_INVALID_BODY", msg: "body don't contains data for update"});
 
-	updateDataKeys = Object.keys(updateData);
+	updateDataKeys = Object.keys(req.body);
 	
 	for (el in updateDataKeys) {
 		if(!(updateDataKeys[el] in userUpdateParams))
 			return res.status(400).send({code: "E_INVALID_BODY", msg: "body contains unless data"});
 	}
 
-	let user = await UserModel.findOne({_id: ACCOUNT_ID});
-	if (user instanceof Error){
-		console.log(user);
-		return res.status(500).send({code: "E_SERVER_INTERNAL", msg: "couldn't find user with this id", id: ACCOUNT_ID }); 
+	try {
+		let user = await UserModel.findOne({_id: req.decoded._id});
+	} catch (e) {
+		console.log(e);
+		return res.status(500).send({code: "E_SERVER_INTERNAL", msg: "couldn't update your account"});
 	}
+	
 
 	if (updateData["ACCOUNT_NAME"]) {
 		if (!(typeof updateData["ACCOUNT_NAME"] == 'string'))
@@ -138,16 +139,18 @@ let userUpdate = async (req, res) => {
 	user.ACCOUNT_UPDATEDAT = new Date();
 	user.ACCOUNT_UPDATEDAT_TIMESTAMP = Date.now();
 
-	let updUser = await user.save();
-	if (updUser instanceof Error) {
-		console.log(updUser);
-		return res.status(500).send({code: "E_SERVER_INTERNAL", msg: "couldn't update user"});
+	try {
+		let updUser = await user.save();
+	} catch (e) {
+		console.log(e);
+		return res.status(500).send({code: "E_SERVER_INTERNAL", msg: "couldn't update your account"});
 	}
 
-	return res.status(200).send({status: "ok", msg: "user updated succesfully", userUpdated: {id: updUser._id}});
 
+	return res.status(200).send({status: "ok", msg: "user updated succesfully", userUpdated: {id: updUser._id}});
 }
 
 module.exports = {
-	updateUsers: userUpdate
+	updateUser: userUpdate
 }
+

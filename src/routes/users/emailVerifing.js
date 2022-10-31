@@ -2,19 +2,10 @@ const {ObjectId} = require("mongoose").Types;
 const uuid = require("uuid");
 
 const {VerifyTokenModel, UserModel} = require("../../models/");
+const {validId} = require("../../utils").validations;
 
+// let validId = (id) => { 
 
-let validId = (id) => { 
-    if(ObjectId.isValid(id)){
-
-        if((String)(new ObjectId(id)) === id)
-            return true;       
-
-        return false;
-    }
-
-    return false;
-}
 
 let emailVerifying = async (req, res) => {
 	if (!req.query)
@@ -23,7 +14,7 @@ let emailVerifying = async (req, res) => {
 	if ((typeof req.query ["id"] != 'string')|| !(req.query["id"]) || (req.query["id"] == ""))
 		return res.status(400).send({code: "E_INVALID_PARAMETERS", msg: "couldn't get user id"});
 
-	if ((typeof req.query["id"] != 'string') || !(req.query["code"]) || (req.query["code"] == ""))
+	if ((typeof req.query["code"] != 'string') || !(req.query["code"]) || (req.query["code"] == ""))
 		return res.status(400).send({code: "E_INVALID_PARAMETERS", msg: "couldn't get user verify code"});
 
 	if (!validId(req.query["id"]))

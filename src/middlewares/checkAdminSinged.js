@@ -1,6 +1,6 @@
 const jwt = require("jsonwebtoken");
 
-const {UserModel} = require("../models");
+const {AdminModel} = require("../models");
 
 module.exports = async (req, res, next) => {
 	if (!req.cookies.adminTok)
@@ -11,13 +11,17 @@ module.exports = async (req, res, next) => {
 			return res.status(401).send({code: "E_COULDNT_AUTH", msg: "couldn't get admin token"});
 
 		try {
-			let user = UserModel.findOne({_id: decoded.id});
-			if(!user)
+			let admin = AdminModel({_id: decoded._id});
+			if (!admin)
 				return res.status(404).send({code: "E_NOT_FINDED", msg: "user with this token broken"});
 		} catch (e) {
 			console.log(e);
-			return res.status(500).send({code: "E_SERVER_INTERNAL", msg: "cannot check account valid"})
+			return res.status(500).send({code: "E_SERVER_INTERNAL", msg: "couldn't check admin token"});
 		}
+
+		let {exp, iat, ...decode} = decoded;
+
+		req.body.admin.decoded = decode;
 	});
 
 	next();

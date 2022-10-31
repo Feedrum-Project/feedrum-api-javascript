@@ -3,27 +3,29 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 
 const {UserModel, AdminModel} = require("../../models");
+const {validId, validEmail} = require("../../utils").validations;
 
-let validEmail = (email) => {
-	return emailValidation.is_email_valid(email);
-}
+// let validEmail = (email) => {
+// 	return emailValidation.is_email_valid(email);
+// }
 
 let userLogin = async (req, res) => {
-	if (Object.keys(req.body).length == Object.keys({}).length)
+	let {decoded, ...body} = req.body
+	if (Object.keys(body).length == Object.keys({}).length)
 		return res.status(400).send({code: "E_INVALID_BODY", msg: "couldn't get body"});
 
 
-	if (!(req.body.ACCOUNT_EMAIL) || !(req.body.ACCOUNT_PASSWORD))
+	if (!(body.ACCOUNT_EMAIL) || !(body.ACCOUNT_PASSWORD))
 		return res.status(400).send({code: "E_INVALID_BODY", msg: "couldn't get email or/and password"});
 
 
-	if (!(validEmail(req.body.ACCOUNT_EMAIL)))
+	if (!(validEmail(body.ACCOUNT_EMAIL)))
 		return res.status(400).send({code: "E_INVALID_BODY", msg: "email is broken"});
 
-	if (!(typeof req.body.ACCOUNT_PASSWORD == 'string'))
+	if (!(typeof body.ACCOUNT_PASSWORD == 'string'))
 		return res.status(400).send({code: "E_INVALID_BODY", msg: "password is broken"});
 
-	let ACCOUNT_PASSWORD = req.body.ACCOUNT_PASSWORD.trim();
+	let ACCOUNT_PASSWORD = body.ACCOUNT_PASSWORD.trim();
 
 	if (ACCOUNT_PASSWORD.length <= 8 || ACCOUNT_PASSWORD.length >= 32)
 		return res.status(400).send({code: "E_INVALID_BODY", msg: "password length must be large than or equal 8 or less than or equal 32"});
@@ -31,7 +33,7 @@ let userLogin = async (req, res) => {
 	let user;
 
 	try {
-		user = await UserModel.findOne({ACCOUNT_EMAIL: req.body.ACCOUNT_EMAIL});
+		user = await UserModel.findOne({ACCOUNT_EMAIL: body.ACCOUNT_EMAIL});
 	} catch (e) {
 		console.log(e);
 		return res.status(500).send({code: "E_SERVER_INTERNAL", msg: "couldn't get user"});
@@ -43,7 +45,7 @@ let userLogin = async (req, res) => {
 	if (!(user._doc.ACCOUNT_VERIFYED_EMAIL))
 		return res.status(403).send({code: "E_NOT_EXIST", msg: "verify you email"});
 
-	bcrypt.compare(req.body.ACCOUNT_PASSWORD, user._doc.ACCOUNT_HASHED_PASSWORD, async (err, result) => {
+	bcrypt.compare(body.ACCOUNT_PASSWORD, user._doc.ACCOUNT_HASHED_PASSWORD, async (err, result) => {
 		if (err) {
 			console.log(err);
 			return res.status(500).send({code: "E_SERVER_INTERNAL", msg: "couldn't compare passwords"});

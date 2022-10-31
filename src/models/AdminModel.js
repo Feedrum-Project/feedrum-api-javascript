@@ -33,3 +33,17 @@ let adminScheme = new Schema({
 }, {versionKey: false});
 
 module.exports = Admin = model("admins", adminScheme);
+
+Admin.adminCreate = async (adminData) => {
+	if (!(adminData) || !(Object.keys(adminData).length == Object.keys({}).length));
+		return Error("admin object has not be empty");
+
+	let admin = new Admin(adminData);
+
+	try {
+		admin.save();
+		return admin._id;
+	} catch (e) {
+		return Error("cannot create admin");
+	}
+}
