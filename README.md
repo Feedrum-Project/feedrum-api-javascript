@@ -2,11 +2,11 @@
 
 It's repository, what contains code of Feedrum's RESTful API.
 
-### in first time base repo for hosting RESful API
+### this is base repo for hosting RESful API for this time
 
 
 Technologies, used for building it:
-- Node.js (serverless side)
+- Node.js (server side)
 - Express (MVC library)
 - MongoDB (DBMS) (May migrate to PostgreSQL)
 - Mongoose (ORM system for MongoDB)
