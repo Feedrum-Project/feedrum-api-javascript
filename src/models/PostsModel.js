@@ -5,9 +5,9 @@ let postsSchema = new Schema({
 		type: String,
 		required: true
 	},
-	POST_BODY: {
+	POST_PATH: {
 		type: String,
-		required: true
+		default: ""
 	},
 	POST_AUTHOR: {
 		type: ObjectId,

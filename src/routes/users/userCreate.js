@@ -71,7 +71,7 @@ let createUser = async (req, res) => {
 				TOKEN_VERIFY_TOKEN: uuid()
 			});
 			
-			let tokSaved = userVerifyToken.save();
+			let tokSaved = await userVerifyToken.save();
 
 			if(tokSaved instanceof Error) {
 				console.log(tokSaved);

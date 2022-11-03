@@ -32,8 +32,6 @@ let emailVerifying = async (req, res) => {
 		return res.status(400).send({code: "E_SERVER_INTERNAL", msg: "couldn't check verify code"});
 	}
 
-
-
 	if (!verifyToken) {
 		return res.status(404).send({code: "E_NOT_FINDED", code: "invalid verify code"});
 	}
@@ -41,7 +39,7 @@ let emailVerifying = async (req, res) => {
 	let user;
 
 	try {
-		user = await UserModel.findOne({id: verifyToken._doc.TOKEN_USER_ID});
+		user = await UserModel.findOne({_id: req.query["id"]});
 	} catch (e) {
 		verifyToken.TOKEN_VERIFY_TOKEN = uuid.v4();
 
@@ -55,7 +53,8 @@ let emailVerifying = async (req, res) => {
 		return res.status(400).send({code: "E_SERVER_INTERNAL", msg: "couldn't get user"});
 	}
 
-
+	if (!user)
+		return res.status(404).send({code: "E_NOT_EXIST", msg: "user not found"})
 	user.ACCOUNT_VERIFYED_EMAIL = true;
 
 	try {
@@ -71,7 +70,6 @@ let emailVerifying = async (req, res) => {
 			return res.status(500).send({code: "E_SERVER_INTERNAL", msg: "couldn't get verify code"});
 		}
 
-		console.log(updUser);
 		return res.status(400).send({code: "E_SERVER_INTERNAL", msg: "couldn't check email"});
 	}
 
