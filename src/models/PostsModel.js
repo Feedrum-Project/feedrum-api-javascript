@@ -3,11 +3,15 @@ const {ObjectId, Schema, model} = require("mongoose");
 let postsSchema = new Schema({
 	POST_HEADER: {
 		type: String,
-		required: true
+		required: true,
+		minLength: 5,
+		maxLength: 36
 	},
-	POST_PATH: {
+	POST_BODY: {
 		type: String,
-		default: ""
+		required: true,
+		minLength: 600,
+		maxLength: 15000
 	},
 	POST_AUTHOR: {
 		type: ObjectId,
@@ -37,6 +41,6 @@ let postsSchema = new Schema({
 		type: Number,
 		default: Date.now()
 	}
-});
+}, {versionKey: false});
 
 module.exports = Posts = model("posts", postsSchema);

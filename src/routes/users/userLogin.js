@@ -63,7 +63,7 @@ let userLogin = async (req, res) => {
 		res.cookie("userTok", token, {maxAge: Number(process.env.TOKEN_EXPIREAT)});
 		res.cookie("refreshUserTok", refreshToken, {maxAge: Number(process.env.TOKEN_EXPIREAT) + 86400000});
 
-		res.send("logged succesfull")
+		res.status(200).send({status: "ok", msg: "you are logged succesfully"})
 
 	})
 }

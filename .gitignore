@@ -106,3 +106,6 @@ dist
 # Yarn lock file
 yarn.lock
 
+/imgs
+
+package-lock.json

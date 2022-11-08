@@ -1,8 +1,11 @@
 const {Router} = require("express");
 
-const {createPost} = require("./postCreate");
-
 const {singInCheckMiddleware, adminSingedIn} = require("../../middlewares");
+
+const {imageUpload} = require("../../utils/");
+
+const {createPost} = require("./postCreate");
+const {getPosts} = require("./postsGet")
 
 
 let postsRouter = new Router();
@@ -11,7 +14,7 @@ postsRouter
 	.post("/postcreate", singInCheckMiddleware, createPost);
 
 postsRouter
-	.get("/", singInCheckMiddleware, (req, res) => res.send({code: "iasc", msg: "akcn"}));
+	.get("/", singInCheckMiddleware, getPosts);
 
 
 
