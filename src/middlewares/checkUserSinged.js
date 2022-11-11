@@ -17,7 +17,7 @@ module.exports = async (req, res, next) => {
 		try {
 			let user = UserModel.findOne({_id: decoded._id});
 			if(!user)
-				return res.status(404).send({code: "E_NOT_FINDED", msg: "user with this token broken"});
+				return res.status(404).send({code: "E_NOT_FOUND", msg: "user with this token broken"});
 		} catch (e) {
 			console.log(e);
 			return res.status(500).send({code: "E_SERVER_INTERNAL", msg: "cannot check account valid"})

@@ -13,7 +13,7 @@ module.exports = async (req, res, next) => {
 		try {
 			let admin = AdminModel({_id: decoded._id});
 			if (!admin)
-				return res.status(404).send({code: "E_NOT_FINDED", msg: "user with this token broken"});
+				return res.status(404).send({code: "E_NOT_FOUND", msg: "user with this token broken"});
 		} catch (e) {
 			console.log(e);
 			return res.status(500).send({code: "E_SERVER_INTERNAL", msg: "couldn't check admin token"});

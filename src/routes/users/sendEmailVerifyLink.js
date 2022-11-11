@@ -5,18 +5,6 @@ const {UserModel, VerifyTokenModel} = require("../../models");
 
 const {validId} = require("../../utils").validations;
 
-// let validId = (id) => { 
-//     if(ObjectId.isValid(id)){
-
-//         if((String)(new ObjectId(id)) === id)
-//             return true;       
-
-//         return false;
-//     }
-
-//     return false;
-// }
-
 let sendEmailVerifyLink = async (req, res) => {
 	let {decoded, ...body} = req.body
 	if (Object.keys(body).length == Object.keys({}).length)

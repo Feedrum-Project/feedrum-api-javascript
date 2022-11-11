@@ -33,7 +33,7 @@ let emailVerifying = async (req, res) => {
 	}
 
 	if (!verifyToken) {
-		return res.status(404).send({code: "E_NOT_FINDED", code: "invalid verify code"});
+		return res.status(404).send({code: "E_NOT_FOUND", code: "invalid verify code"});
 	}
 
 	let user;

@@ -56,9 +56,16 @@ let userLogin = async (req, res) => {
 
 		let {ACCOUNT_HASHED_PASSWORD, ...userPayload} = user._doc;
 
+		let token, refreshToken;
 
-		let token = await jwt.sign(userPayload, process.env.USER_SECRET, {expiresIn: Number(process.env.TOKEN_EXPIREAT)});
-		let refreshToken = await jwt.sign(userPayload, process.env.USER_REFRESH_SECRET, {expiresIn: Number(process.env.TOKEN_EXPIREAT) + 86400000});
+		try {
+			token = await jwt.sign(userPayload, process.env.USER_SECRET, {expiresIn: Number(process.env.TOKEN_EXPIREAT)});
+			refreshToken = await jwt.sign(userPayload, process.env.USER_REFRESH_SECRET, {expiresIn: Number(process.env.TOKEN_EXPIREAT) + 86400000});
+		} catch (e) {
+			console.log(e);
+			return res.status(500).send({code:"E_SERVER_INTERNAL", msg: "cannot authenticate you"})
+		}
+
 
 		res.cookie("userTok", token, {maxAge: Number(process.env.TOKEN_EXPIREAT)});
 		res.cookie("refreshUserTok", refreshToken, {maxAge: Number(process.env.TOKEN_EXPIREAT) + 86400000});
