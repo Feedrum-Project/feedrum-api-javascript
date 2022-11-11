@@ -21,4 +21,4 @@ Dependencies, used for making Feedrum API:
 
 ### Docs you can get in: 
 - API - [docs/api/](docs/api/README.md)
-- Errors - [docs/errors](docs/api/errors)
+- Errors - [docs/errors](docs/errors/README.md)
