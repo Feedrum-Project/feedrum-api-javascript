@@ -1,35 +1,35 @@
-Feedrum API docs
+# Feedrum API
 
 Allowed methods: 
-# `/api/users` path ([users/users.md](users/user.md))
+# `/api/users`
 
-/users
+- [`/users`](users/users.md)
 
-/users/userdelete
+- /users/userdelete
 
-/users/useradd
+- /users/useradd
 
-/users/userupdate
+- /users/userupdate
 
 
-# `/api/users/user` path ([users/user.md](users/user.md))
+# `/api/users/user` 
 
-/users/user
+- [`/users/user`](user/user.md)
 
-/users/user/:id
+- [`/users/user/:id`](user/user.md)
 
-/users/user/update
+- [`/users/user/login`](user/login.md)
 
-/users/user/delete
+- /users/user/update
 
-/users/user/login
+- /users/user/delete
 
-/users/user/logout
+- [`/users/user/logout`](user/logout.md)
 
-/users/user/login/refresh
+- /users/user/login/refresh
 
-/users/user/verifyEmailLink
+- /users/user/verifyEmailLink
 
-/users/user/email/verify?id=user_id&code=verify_token
+- /users/user/email/verify?id=user_id&code=verify_token
 
 
