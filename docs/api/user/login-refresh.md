@@ -1,6 +1,6 @@
 # API Route `/users/user/login/refresh`
 
-# GET `/users/user/login/refresh` - update you login tokens above expiring tokens
+# GET `/users/user/login/refresh` - update you login tokens when it expire
 
 Authentication: `true`
 
