@@ -29,18 +29,6 @@ let userScheme = new Schema({
 		type: Number,
 		default: 0
 	},
-	ACCOUNT_RANKED_BY: {
-		type: [ObjectId],
-		default: []
-	},
-	ACCOUNT_POSTS: {
-		type: [ObjectId],
-		default: []
-	},
-	ACCOUNT_COMMENTS: {
-		type: [ObjectId],
-		default: []
-	},
 	ACCOUNT_CREATEDAT: {
 		type: Date,
 		default: new Date

@@ -5,7 +5,6 @@ const {connect} = require("mongoose");
 const {config} = require("dotenv");
 const express = require("express");
 
-
 // const {singInCheckMiddleware} = require("./middlewares/")
 const {imageUpload} = require("./utils/");
 const routes = require("./routes/index");

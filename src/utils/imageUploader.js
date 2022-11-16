@@ -6,8 +6,6 @@ const os = require("os");
 
 // console.log(`${os.homedir()}${process.env.IMG_PATH}`)
 
-let IMG_EXECTIONS = [".jpg", ".jpeg", ".png", ".gif"]
-
 let storage = multer.diskStorage({
 	destination: function(req, files, callback) {
     	callback(null, `${os.homedir()}${process.env.IMG_PATH}`);

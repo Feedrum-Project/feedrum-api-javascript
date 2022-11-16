@@ -21,10 +21,6 @@ let postsSchema = new Schema({
 		type: Number,
 		default: 0
 	},
-	POST_COMMENTS: {
-		type: [ObjectId],
-		default: []
-	},
 	POST_CREATEDAT: {
 		type: Date,
 		default: new Date()
