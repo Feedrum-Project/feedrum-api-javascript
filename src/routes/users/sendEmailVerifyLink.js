@@ -44,21 +44,24 @@ let sendEmailVerifyLink = async (req, res) => {
 
 	userTok = verifyToken._doc.TOKEN_VERIFY_TOKEN;
 
-	let verifyLink = `${process.env.DEFAULT_APP_LINK}/users/user/email/verify?id=${userId}&code=${userTok}`;
+	let verifyLinkMsg = `
+	<h2> Hi, there! </h2>
+	<p>Ми хочему перевірити валідність вашої електронної скриньки, тому відправили відповідне посилання для цього</p>
+	<p>Просто скопіюйте це посилання в рядок вашого браузеру і перейдіть на нього, а решту ми зробимо самі</p>
+	<p><code>${process.env.DEFAULT_APP_LINK}/users/user/email/verify?id=${userId}&code=${userTok}<code><p>
+	`;
 
 	try {
 		let mail = await emailTransporter({
 			to: user.ACCOUNT_EMAIL, 
 			subject: "Email verifing", 
-			message: `Welcome, ${user._doc.ACCOUNT_NAME}! <br> Please, visit next page for veryfig email <br><br> <a href="${verifyLink}">${verifyLink}</a>`
+			message: verifyLinkMsg
 		});
 
 	} catch (e) {
 		console.log(e);
 		return res.status(500).send({code: "E_SERVER_INTERNAL", msg: "couldn't send email"});
 	}
-
-
 
 	return res.status(200).send({status: "ok", msg: "verify link sended succesfully"});
 

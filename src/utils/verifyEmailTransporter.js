@@ -1,6 +1,8 @@
-const {config} = require("dotenv");
-
 const nodemailer = require("nodemailer");
+const handlebars = require("handlebars");
+const {config} = require("dotenv");
+const path = require("path");
+const fs = require("fs");
 
 config();
 
@@ -29,20 +31,24 @@ module.exports = async (msgObj) => {
 		}
 	});
 
+	let templatePath = path.join(__dirname, "../../assets/verify-message.hbs");
+	let data = fs.readFileSync(templatePath, 'utf-8').toString();
+	let template = handlebars.compile(data);
+
+	let htmlToSend = template({message: msgObj.message});
+	
+	// let htmlToSend = data.replaceAll('href="#"', `href="${msgObj.link}"`);
+
 	let message = {
 		from: "noreply@saily",
 		to: msgObj.to,
 		subject: msgObj.subject,
-		html: `<html>
-			<body>
-			<h2 style="background: #7685cf; color: white; text-align: center; padding: 15px; font-size: 36;">Saily App Mail Notifications</h2>
-			<br>
-			${msgObj.message}
-			<br>
-			<hr width="100%">
-			<h6>Okto group</h6>
-			</body>
-			</html>`
+		atachments: [{
+			filename: "vyshyvanka.png",
+			path: path.join(__dirname, "../../assets/vyshyvanka.png"),
+			cid: "link"
+		}],
+		html: htmlToSend
 	}
 
 	try {

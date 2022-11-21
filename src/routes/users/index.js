@@ -3,6 +3,7 @@ const {Router} = require("express");
 
 
 const {sendEmailVerifyLink} = require("./sendEmailVerifyLink");
+const {userGetUpvotes} = require("./user/userGetUpvotes");
 const {refreshUserToken} = require("./userTokenRefresh");
 const {emailVerifing} = require("./emailVerifing");
 const {deleteUser} = require("./user/userDelete");
@@ -12,8 +13,10 @@ const {getUserById} = require("./userGetById");
 const {deleteUsers} = require("./userDelete");
 const {createUser} = require("./userCreate");
 const {logoutUser} = require("./userLogout");
+const {upvoteUser} = require("./userUpvote");
 const {loginUser} = require("./userLogin");
 const {getUsers} = require("./usersGet");
+const {getMe} = require("./getMe");
 
 const {singInCheckMiddleware, userNotSigned, adminSingedIn} = require("../../middlewares");
 
@@ -48,10 +51,19 @@ userRoutes
 	.get("/user/login/refresh", singInCheckMiddleware,refreshUserToken);
 
 userRoutes
-	.get("/user/delete", singInCheckMiddleware, deleteUser);
+	.delete("/user/delete", singInCheckMiddleware, deleteUser);
 
 userRoutes
 	.get("/user/logout", singInCheckMiddleware, logoutUser);
+
+userRoutes
+	.put("/user/upvote", singInCheckMiddleware, upvoteUser);
+
+userRoutes
+	.get("/user/upvotes", singInCheckMiddleware, userGetUpvotes);
+
+userRoutes
+	.get("/user/me", singInCheckMiddleware, getMe);
 
 userRoutes
 	.get("/user/:id", singInCheckMiddleware, getUserById);

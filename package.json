@@ -1,9 +1,9 @@
 {
-  "name": "saily-api",
+  "name": "feedrum-api-javascript",
   "version": "1.0.0",
   "description": "Saily - simple blog platform for peoples in IT - from beginners and amateurs to very professional and autority IT-spechs",
   "main": "src/index.js",
-  "repository": "https://github.com/JudgementDev/saily-api.git",
+  "repository": "https://github.com/Feedrum-Project/feedrum-api-javascript.git",
   "author": "S.W.C <nedrocker227@gmail.com>",
   "license": "MIT",
   "scripts": {
@@ -17,6 +17,7 @@
     "dotenv": "^16.0.3",
     "express": "^4.18.1",
     "fs": "^0.0.1-security",
+    "handlebars": "^4.7.7",
     "image-size": "^1.0.2",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.6.4",

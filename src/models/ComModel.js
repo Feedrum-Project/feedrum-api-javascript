@@ -15,6 +15,10 @@ let comSchema = new Schema({
 		minLength: 16,
 		maxLength: 256
 	},
+	COMENTARY_RANK: {
+		type: Number,
+		default: 0
+	},
 	COMENTARY_CREATEDAT: {
 		type: Date,
 		default: new Date()

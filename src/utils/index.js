@@ -1,11 +1,11 @@
 const {config} = require("dotenv");
 
-const emailTransporter = require("./emailTransporter");
+const emailTransporter = require("./verifyEmailTransporter");
 const updateParamsList = require("./updateParamsList");
 const imageUpload = require("./imageUploader");
 const validFuncs = require("./validations");
 
-config()
+config();
 
 module.exports = {
 	emailTransporter: emailTransporter,

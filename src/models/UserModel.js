@@ -29,6 +29,10 @@ let userScheme = new Schema({
 		type: Number,
 		default: 0
 	},
+	ACCOUNT_UPVOTED_BY: [{
+		ACCOUNT_UPVOTED_BY: ObjectId,
+		UPVOTE_POSITIVE: Boolean
+	}],
 	ACCOUNT_CREATEDAT: {
 		type: Date,
 		default: new Date

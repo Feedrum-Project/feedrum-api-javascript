@@ -4,7 +4,7 @@ const {singInCheckMiddleware, adminSingedIn} = require("../../middlewares");
 
 const {imageUpload} = require("../../utils/");
 
-const {comsRouter} = require("../comentaries");
+const {comsRouter} = require("../commentaries");
 
 const {getAllPostsByAuthor} = require("./postsGetAllByAuthor");
 const {updatePost} = require("./postUpdate");
@@ -28,7 +28,7 @@ postsRouter
 	.get("/postsBy", singInCheckMiddleware, getAllPostsByAuthor);
 
 postsRouter
-	.use("/comentaries", comsRouter);
+	.use("/commentaries", comsRouter);
 
 
 module.exports = postsRouter;

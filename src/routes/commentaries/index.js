@@ -13,7 +13,7 @@ comsRouter
 	.post("/create", singInCheckMiddleware, createComentary);
 
 comsRouter
-	.post("/comentary/update", singInCheckMiddleware, updateComentary);
+	.post("/commentary/update", singInCheckMiddleware, updateComentary);
 
 comsRouter
 	.get("/", singInCheckMiddleware, getPostComentaries);
