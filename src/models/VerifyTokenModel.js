@@ -1,6 +1,8 @@
 const {Schema, model} = require("mongoose");
 const {ObjectId} = require("mongoose").Types;
 
+// TODO: change all types to mongoose.Types
+
 let verifyTokenScheme = new Schema({
 	TOKEN_ACCOUNT_ID: {
 		type: ObjectId,

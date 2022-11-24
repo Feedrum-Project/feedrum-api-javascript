@@ -1,6 +1,6 @@
 # API code errors
 
-all response in Feedrum API (but it has expections) returned in JSON, and errors not expection;
+all response in Feedrum API (but it has expections) returned in JSON,; errors not expection;
 
 ### Error base template
 ```json
@@ -12,11 +12,14 @@ all response in Feedrum API (but it has expections) returned in JSON, and errors
 
 ### Error codes
 
-- `E_SERVER_INTERNAL` - return HTTP code 500 and mean what on server 
-- `E_INVALID_BODY` - return HTTP code `400` and mean, what request body has no valid options 
-- `E_NOT_FOUND` - return HTTP code `404` and mean, what some object (user, post, comment, etc.) has not found
-- `E_NOT_EXIST` - same, what `E_NOT_FOUND`
-- `E_ALREADY_EXIST` - return  HTTP code `403` and mean what some object (user, account email, etc.) was been exist
-- `E_NOT_SIGNED` - return  HTTP code `400` and mean what you dont have authentication tokens
-- `E_COULDNT_AUTH` - return  HTTP code `401` and mean, what server cannot check what token is valid
-- `E_NOT_ACCESS` - return HTTP code `403` and mean, what you has no access to some resource (it error catch if you signed in)
+- `E_SERVER_INTERNAL`	- returning HTTP code `500`;  server have some  problems
+- `E_INVALID_BODY`		- returning HTTP code `400`;  request's body has no valid parameters 
+- `E_NOT_FOUND` 		- returning HTTP code `404`;  some object (user, post, comment, etc.) has not found (now uses rarely)
+- `E_ALREADY_EXIST` 	- returning  HTTP code `403`; some object (user, account email, etc.) already exist
+- `E_NOT_SIGNED` 		- returning  HTTP code `400`; you dont have authentication tokens
+- `E_COULDNT_AUTH` 		- returning  HTTP code `401`; server cannot check token's valid
+- `E_NOT_ACCESS` 		- returning HTTP code `403`;  you has no access to some resource (error would expected if you signed in)
+
+### Error code aliases
+
+- `E_NOT_EXIST` 		- aliase of `E_NOT_FOUND`.

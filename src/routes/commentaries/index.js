@@ -16,10 +16,10 @@ comsRouter
 	.post("/commentary/update", singInCheckMiddleware, updateComentary);
 
 comsRouter
-	.get("/", singInCheckMiddleware, getPostComentaries);
+	.get("/", getPostComentaries);
 
 comsRouter
-	.get("/comentary", singInCheckMiddleware, getComentary);
+	.get("/comentary", getComentary);
 
 module.exports = {
 	comsRouter: comsRouter

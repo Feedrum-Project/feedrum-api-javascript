@@ -1,5 +1,7 @@
 const {Schema, ObjectId, model} = require("mongoose");
 
+// TODO: change all types to mongoose.Types
+
 let comSchema = new Schema({
 	COMENTARY_AUTHOR: {
 		type: ObjectId,

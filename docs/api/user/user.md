@@ -30,7 +30,14 @@ Body: `none`
 
 Queries: `none` 
 
-Params: `Mongoose.Types.ObjectId`
+Params: ```json
+{
+	"url_parameters": {
+		"name": "id",
+		"type": "Mongoose.Types.ObjectId"
+	}
+}
+```
 
 Response: 
 - Headers: `none`

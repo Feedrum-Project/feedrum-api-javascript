@@ -1,5 +1,7 @@
 const {ObjectId, Schema, model} = require("mongoose");
 
+// TODO: change all types to mongoose.Types
+
 let postsSchema = new Schema({
 	POST_HEADER: {
 		type: String,
@@ -21,6 +23,10 @@ let postsSchema = new Schema({
 		type: Number,
 		default: 0
 	},
+	POST_UPVOTED_BY: [{
+		ACCOUNT_UPVOTED_BY: ObjectId,
+		UPVOTE_POSITIVE: Boolean
+	}, {_id: false}],
 	POST_CREATEDAT: {
 		type: Date,
 		default: new Date()

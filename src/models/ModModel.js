@@ -1,5 +1,7 @@
 const {Schema, model} = require("mongoose");
 
+// TODO: change all types to mongoose.Types
+
 let modSchema = new Schema({
 	MODERATOR_LOGIN: {
 		type: String,

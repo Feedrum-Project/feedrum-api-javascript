@@ -6,7 +6,7 @@ const {ImageModel} = require("../../models");
 const {validId} = require("../../utils").validations;
 
 let deleteImg = async (req, res) => {
-	let id = req.params["id"];
+	let id = req.query["id"];
 	let image, imageDeleted;
 
 	if (!validId(id)) {

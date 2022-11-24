@@ -1,5 +1,7 @@
 const {Schema, ObjectId, model} = require("mongoose");
 
+// TODO: change all types to mongoose.Types
+
 let imageScheme = new Schema({
 	IMAGE_NAME: {
 		type: String,

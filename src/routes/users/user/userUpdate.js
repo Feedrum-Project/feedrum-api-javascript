@@ -5,47 +5,25 @@ const {validId, validEmail} = require("../../../utils").validations;
 const {userUpdateParams} = require("../../../utils");
 
 
-let userUpdate = async (req, res) => {
+let userUpdateUsername = async (req, res) => {
 	if (!req.body)
 		return res.status(400).send({code: "E_INVALID_BODY", msg: "body has not be empty"});
 
-	
-	// let {decoded, ...updateData} = req.body;
-	// console.log(decoded, updateData)
-
-	if(Object.keys(req.body).length == Object.keys({}).length)
-		return res.status(400).send({code: "E_INVALID_BODY", msg: "body don't contains data for update"});
-
-	updateDataKeys = Object.keys(req.body);
-	
-	for (el in updateDataKeys) {
-		if(!(updateDataKeys[el] in userUpdateParams))
-			return res.status(400).send({code: "E_INVALID_BODY", msg: "body contains unless data"});
-	}
+	if (!req.body.ACCOUNT_NAME
+		|| typeof req.body.ACCOUNT_NAME != "string"
+		|| req.body.ACCOUNT_NAME == ""
+		|| req.body.ACCOUNT_NAME < 3
+		|| req.body.ACCOUNT_NAME > 36)
+			return res.status(400).send({code: "E_INVALID_BODY", msg: "body paramete ACCOUNT_NAME invalid"});
 
 	try {
 		let user = await UserModel.findOne({_id: req.decoded._id});
+		delete user._doc.ACCOUNT_HASHED_PASSWORD;
 	} catch (e) {
 		console.log(e);
 		return res.status(500).send({code: "E_SERVER_INTERNAL", msg: "couldn't update your account"});
 	}
-	
 
-	if (updateData["ACCOUNT_NAME"]) {
-		if (!(typeof updateData["ACCOUNT_NAME"] == 'string'))
-			return res.status(400).send({code: "E_INVALID_BODY", msg: "`ACCOUNT_NAME` not a string"});
-
-		if (updateData["ACCOUNT_NAME"] == "")
-			return res.status(400).send({code: "E_INVALID_BODY", msg: "body has empty `ACCOUNT_NAME`"});
-
-		if (!(updateData["ACCOUNT_NAME"].length >= 3) || !(updateData["ACCOUNT_NAME"].length <= 32))
-			return res.status(400).send({code: "E_INVALID_BODY", msg: "`ACCOUNT_NAME` must be large than or equal 3 and less than or equal 32"});
-	
-		if (updateData["ACCOUNT_NAME"] == user.ACCOUNT_NAME)
-			return res.status(403).send({code: "E_ALREADY_EXIST", msg: "new name must not be identity to previouse"});
-
-		user.ACCOUNT_NAME = updateData["ACCOUNT_NAME"];
-	}	
 
 	user.ACCOUNT_UPDATEDAT = new Date();
 	user.ACCOUNT_UPDATEDAT_TIMESTAMP = Date.now();
@@ -62,6 +40,6 @@ let userUpdate = async (req, res) => {
 }
 
 module.exports = {
-	updateUser: userUpdate
+	updateUsername: userUpdateUsername
 }
 

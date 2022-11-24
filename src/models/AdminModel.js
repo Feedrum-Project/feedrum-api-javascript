@@ -1,5 +1,7 @@
 const {Schema, model, ObjectId} = require("mongoose");
 
+// TODO: change all types to mongoose.Types
+
 let adminScheme = new Schema({
 	ADMIN_LOGIN: {
 		type: String,

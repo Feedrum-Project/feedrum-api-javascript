@@ -1,6 +1,6 @@
 const {Schema, model, ObjectId} = require("mongoose");
 
-// let arrayEmptyValues = [{}, [], null, undefined]
+// TODO: change all types to mongoose.Types
 
 let userScheme = new Schema({
 	ACCOUNT_NAME: {
@@ -32,7 +32,7 @@ let userScheme = new Schema({
 	ACCOUNT_UPVOTED_BY: [{
 		ACCOUNT_UPVOTED_BY: ObjectId,
 		UPVOTE_POSITIVE: Boolean
-	}],
+	}, { _id: false }],
 	ACCOUNT_CREATEDAT: {
 		type: Date,
 		default: new Date
