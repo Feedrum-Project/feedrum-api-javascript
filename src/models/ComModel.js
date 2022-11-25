@@ -17,6 +17,10 @@ let comSchema = new Schema({
 		minLength: 16,
 		maxLength: 256
 	},
+	COMENTARY_UPVOTED_BY: [{
+		ACCOUNT_UPVOTED_BY: ObjectId,
+		UPVOTE_POSITIVE: Boolean
+	}, {_id: false}],
 	COMENTARY_RANK: {
 		type: Number,
 		default: 0

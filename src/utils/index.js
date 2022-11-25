@@ -1,6 +1,6 @@
 const {config} = require("dotenv");
 
-const emailTransporter = require("./verifyEmailTransporter");
+const emailTransporter = require("./emailTransporter");
 const updateParamsList = require("./updateParamsList");
 const imageUpload = require("./imageUploader");
 const validFuncs = require("./validations");

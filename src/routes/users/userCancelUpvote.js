@@ -22,10 +22,14 @@ let cancelUpvote = async (req, res) => {
 		return res.status(404).send({code: "E_NOT_EXIST", msg: "user with this id not exist"});
 
 	let upvotes = user._doc.ACCOUNT_UPVOTED_BY,
+		upvote = upvotes.filter(upvote => upvote.ACCOUNT_UPVOTED_BY == decoded._id),
 		userSaved;
-	
-	user.ACCOUNT_UPVOTED_BY = upvotes.filter(upvote => upvote.ACCOUNT_UPVOTED_BY != decoded._id)
 
+	if (Object.keys(upvote).length == Object.keys([]).length)
+		return res.status(404).send({code: "E_NOT_EXIST", msg: "you are not upvoted to this user"});
+	
+	user.ACCOUNT_UPVOTED_BY = upvotes.filter(upvote => upvote.ACCOUNT_UPVOTED_BY != decoded._id);
+	user.ACCOUNT_RANK -= 3;
 	try {
 		userSaved = await user.save();
 	} catch (e) {

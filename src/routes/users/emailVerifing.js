@@ -11,10 +11,14 @@ let emailVerifying = async (req, res) => {
 	if (!req.query)
 		return res.status(400).send({code: "E_INVALID_PARAMETERS", msg: "couldn't get user id and verify code"});
 
-	if ((typeof req.query ["id"] != 'string')|| !(req.query["id"]) || (req.query["id"] == ""))
+	if ((typeof req.query ["id"] != 'string') 
+		|| !(req.query["id"]) 
+		|| (req.query["id"] == ""))
 		return res.status(400).send({code: "E_INVALID_PARAMETERS", msg: "couldn't get user id"});
 
-	if ((typeof req.query["code"] != 'string') || !(req.query["code"]) || (req.query["code"] == ""))
+	if ((typeof req.query["code"] != 'string') 
+		|| !(req.query["code"]) 
+		|| (req.query["code"] == ""))
 		return res.status(400).send({code: "E_INVALID_PARAMETERS", msg: "couldn't get user verify code"});
 
 	if (!validId(req.query["id"]))
@@ -54,7 +58,8 @@ let emailVerifying = async (req, res) => {
 	}
 
 	if (!user)
-		return res.status(404).send({code: "E_NOT_EXIST", msg: "user not found"})
+		return res.status(404).send({code: "E_NOT_EXIST", msg: "user not found"});
+	
 	user.ACCOUNT_VERIFYED_EMAIL = true;
 
 	try {

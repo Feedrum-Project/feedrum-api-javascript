@@ -1,7 +1,7 @@
 const {ObjectId} = require("mongoose").Types;
 
-const {emailTransporter} = require("../../utils");
 const {UserModel, VerifyTokenModel} = require("../../models");
+const {emailTransporter} = require("../../utils");
 
 const {validId} = require("../../utils").validations;
 
@@ -40,15 +40,18 @@ let sendEmailVerifyLink = async (req, res) => {
 		return res.status(500).send({code: "E_SERVER_INTERNAL", msg: "couldn't get user verify code"});
 	}
 
-
-
 	userTok = verifyToken._doc.TOKEN_VERIFY_TOKEN;
 
 	let verifyLinkMsg = `
 	<h2> Hi, there! </h2>
+	<br>
 	<p>Ми хочему перевірити валідність вашої електронної скриньки, тому відправили відповідне посилання для цього</p>
+	<br>
 	<p>Просто скопіюйте це посилання в рядок вашого браузеру і перейдіть на нього, а решту ми зробимо самі</p>
+	<br>
 	<p><code>${process.env.DEFAULT_APP_LINK}/users/user/email/verify?id=${userId}&code=${userTok}<code><p>
+	<br>
+	<p class="hint">Якщо ви не знаєте що це за повідомлення ігноруйте його і не переходьте за посиланням!
 	`;
 
 	try {

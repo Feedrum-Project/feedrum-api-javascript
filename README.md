@@ -16,6 +16,10 @@ Dependencies, used for making Feedrum API:
 - node-email-validation (check what email is valid)
 - uuid (generating unicable strings)
 - dotenv (managing environmet variables)
+- multer (parse requests which contains files)
+- handlebars (parsing html templates)
+- fs (managing files)
+
 
 
 

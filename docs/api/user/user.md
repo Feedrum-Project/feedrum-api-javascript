@@ -1,7 +1,7 @@
 # API Route `/api/users/user` 
 
 
-### `GET /user` - get data about loggined user
+### `GET /user/me` - get data about loggined user
 
 Authorization: `true`
 

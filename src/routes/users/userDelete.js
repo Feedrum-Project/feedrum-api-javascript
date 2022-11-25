@@ -4,15 +4,6 @@ const {UserModel} = require("../../models");
 const {validId} = require("../../utils").validations;
 
 
-// let validId = (id) => {
-     
-//     if(ObjectId.isValid(id)){
-//         if((String)(new ObjectId(id)) === id)
-//             return true;       
-//         return false;
-//     }
-//     return false;
-// }
 
 let userDelete = async (req, res) => {
 	let {decoded, ...body} = req.body;

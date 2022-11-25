@@ -19,7 +19,7 @@ let postUpdate = async (req, res) => {
 	if (!body.POST_BODY
 		|| typeof body.POST_BODY != "string"
 		|| body.POST_BODY == ""
-		|| body.POST_BODY.length < 16)
+		|| body.POST_BODY.length < 650)
 		return res.status(400).send({code: "E_INVALID_BODY", msg: "post body don't match with requirements"});
 
 	let post, postUpd;

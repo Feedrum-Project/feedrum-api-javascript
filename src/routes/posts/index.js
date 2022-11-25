@@ -7,6 +7,7 @@ const {imageUpload} = require("../../utils/");
 const {comsRouter} = require("../commentaries");
 
 const {getAllPostsByAuthor} = require("./postsGetAllByAuthor");
+const {cancelPostUpvote} = require("./cancelPostUpvote");
 const {getPostById} = require("./getPostById");
 const {upvotePost} = require("./upvotePost");
 const {updatePost} = require("./postUpdate");
@@ -25,6 +26,9 @@ postsRouter
 
 postsRouter
 	.put("/post/upvote", singInCheckMiddleware, upvotePost);
+
+postsRouter
+	.put("/post/upvote/cancel", singInCheckMiddleware, cancelPostUpvote);
 
 postsRouter
 	.get("/", getPosts);

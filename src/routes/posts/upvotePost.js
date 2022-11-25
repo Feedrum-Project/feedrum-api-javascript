@@ -23,8 +23,8 @@ let upvotePost = async (req, res) => {
 		return res.status(500).send({code: "E_SERVER_INTERNAL", msg: "cannot get post"});
 	}
 
-	if (!post && !user)
-		return res.status(404).send({code: "E_NOT_EXIST", msg: "post with this id not exist or user not exist"});
+	if (!post)
+		return res.status(404).send({code: "E_NOT_EXIST", msg: "post with this id not exist"});
 
 	let upvotes = post._doc.POST_UPVOTED_BY;
 	let upvote = upvotes.filter(upvote => upvote.ACCOUNT_UPVOTED_BY == decoded._id)
@@ -55,19 +55,20 @@ let upvotePost = async (req, res) => {
 	post.POST_UPVOTED_BY.push(upvoteData);
 	post.POST_RANK += upvoteRank;
 
-	user.ACCOUNT_RANK += userUpvoteRank;
-
 	post.POST_UPDATEDAT = new Date();
 	post.POST_UPDATEDAT_TIMESTAMP = Date.now();
 
-	user.ACCOUNT_UPDATEDAT = new Date();
-	user.ACCOUNT_UPDATEDAT_TIMESTAMP = Date.now();
-
+	if (user){
+		user.ACCOUNT_RANK += userUpvoteRank;
+		user.ACCOUNT_UPDATEDAT = new Date();
+		user.ACCOUNT_UPDATEDAT_TIMESTAMP = Date.now();
+	}
 	let postSaved, userSaved;
 
 	try {
 		postSaved = await post.save();
-		userSaved = await user.save();
+		if (user)
+			userSaved = await user.save();
 	} catch (e) {
 		console.log(e);
 		return res.status(500).send({code: "E_SERVER_INTERNAL", msg: "cannot save post or/and user"});

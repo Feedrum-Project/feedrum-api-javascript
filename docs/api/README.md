@@ -1,18 +1,17 @@
 # Feedrum API
 
 Allowed methods: 
-# `/api/users`
+### `/api/users`
 
 - [`/users`](users/users.md)
 
-- /users/userdelete
+- [`/users/userdelete`](users/delete.md)
 
-- /users/useradd
-
-- /users/userupdate
+- [`/users/useradd`](users/useradd.md)
 
 
-# `/api/users/user` 
+
+### `/api/users/user` 
 
 - [`/users/user`](user/user.md)
 
@@ -20,16 +19,26 @@ Allowed methods:
 
 - [`/users/user/login`](user/login.md)
 
-- /users/user/update
-
-- /users/user/delete
-
 - [`/users/user/logout`](user/logout.md)
 
-- /users/user/login/refresh
+- [`/users/user/upvote`](user/upvote.md)
 
-- /users/user/verifyEmailLink
+- [`/users/user/delete`](user/user-delete.md)
 
-- /users/user/email/verify?id=user_id&code=verify_token
+- [`/users/user/upvote/cancel`](user/cancel-upvote.md)
+
+- [`/users/user/login/refresh`](user/login-refresh.md)
+
+- [`/users/user/email/verify`](user/user-verify-email.md)
+
+- [`/users/user/username/update`](user/user-update-username.md)
+
+- [`/users/user/verifyEmailLink`](users/user-send-verify-link.md)
 
 
+### `/api/posts`
+
+- [`/posts/postcreate`](posts/post-create.md)
+
+
+### `/api/posts`
