@@ -10,7 +10,6 @@ Allowed methods:
 - [`/users/useradd`](users/useradd.md)
 
 
-
 ### `/api/users/user` 
 
 - [`/users/user`](user/user.md)
@@ -41,4 +40,6 @@ Allowed methods:
 - [`/posts/postcreate`](posts/post-create.md)
 
 
-### `/api/posts`
+### `/api/posts/post`
+
+- [`/posts/post/update`](posts/post-update.md)
