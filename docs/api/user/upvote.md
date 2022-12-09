@@ -4,7 +4,8 @@
 
 Authentication: `true`
 
-Queries: ```json
+Queries:
+```json
 {
 	"query_parameters": [{
 		"name": "id",
@@ -15,7 +16,8 @@ Queries: ```json
 
 Params: `none`
 
-Body: ```json
+Body:
+```json
 {
 	"UPVOTE_IS_POSITIVE": "Boolean"
 }
@@ -23,7 +25,8 @@ Body: ```json
 
 Response: 
 - Headers: `none`
-- Body: ```json
+- Body: 
+```json
 {
 	"status": "ok",
 	"msg": "user upvoted successfull"

@@ -1,10 +1,8 @@
-const {ObjectId} = require("mongoose").Types;
 const uuid = require("uuid");
 
 const {VerifyTokenModel, UserModel} = require("../../models/");
 const {validId} = require("../../utils").validations;
 
-// let validId = (id) => { 
 
 
 let emailVerifying = async (req, res) => {
@@ -36,9 +34,8 @@ let emailVerifying = async (req, res) => {
 		return res.status(400).send({code: "E_SERVER_INTERNAL", msg: "couldn't check verify code"});
 	}
 
-	if (!verifyToken) {
+	if (!verifyToken) 
 		return res.status(404).send({code: "E_NOT_FOUND", code: "invalid verify code"});
-	}
 
 	let user;
 

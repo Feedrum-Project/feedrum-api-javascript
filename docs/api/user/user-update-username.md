@@ -8,7 +8,8 @@ Queries: `none`
 
 Params: `none`
 
-Body: ```json
+Body: 
+```json
 {
 	"ACCOUNT_USERNAME": "API.Models.UserModel.Schema.ACCOUNT_USERNAME"
 }
@@ -16,12 +17,13 @@ Body: ```json
 
 Response: 
 - Headers: `none`
-- Body: ```json
+- Body: 
+```json
 	{
-		status: "ok", 
-		msg: "user updated succesfully", 
-		userUpdated: {
-			id: Mongoose.Types.ObjectId
+		"status": "ok", 
+		"msg": "user updated succesfully", 
+		"userUpdated": {
+			"id": "Mongoose.Types.ObjectId"
 		}
 	}
 ```

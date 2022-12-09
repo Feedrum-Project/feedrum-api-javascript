@@ -37,9 +37,5 @@ app.use((req, res) =>
 );
 
 
-try {
-	app.listen(process.env.PORT || 3000);
-} catch (e) {
-	console.log(e);
-	app.use((req, res) => res.status(500).send({code: "E_SERVER_INTERNAL", msg: "smth went wrong"}));
-}
+
+app.listen(process.env.PORT || 3000);

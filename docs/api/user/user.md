@@ -30,7 +30,8 @@ Body: `none`
 
 Queries: `none` 
 
-Params: ```json
+Params: 
+```json
 {
 	"url_parameters": {
 		"name": "id",

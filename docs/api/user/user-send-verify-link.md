@@ -8,7 +8,8 @@ Queries: `none`
 
 Params: `none`
 
-Body: ```json
+Body: 
+```json
 {
 	"ACCOUT_ID": "Mongoose.Types.ObjectId"
 }
@@ -16,9 +17,10 @@ Body: ```json
 
 Response: 
 - Headers: `none`
-- Body: ```json
+- Body: 
+```json
 	{
-		status: "ok", 
-		msg: "verify link sended succesfully"
+		"status": "ok", 
+		"msg": "verify link sended succesfully"
 	}
 ```

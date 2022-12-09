@@ -27,8 +27,8 @@ let userLogin = async (req, res) => {
 
 	let ACCOUNT_PASSWORD = body.ACCOUNT_PASSWORD.trim();
 
-	if (ACCOUNT_PASSWORD.length <= 8 || ACCOUNT_PASSWORD.length >= 32)
-		return res.status(400).send({code: "E_INVALID_BODY", msg: "password length must be large than or equal 8 or less than or equal 32"});
+	// if (ACCOUNT_PASSWORD.length <= 8 || ACCOUNT_PASSWORD.length >= 32)
+	// 	return res.status(400).send({code: "E_INVALID_BODY", msg: "password length must be large than or equal 8 or less than or equal 32"});
 
 	let user;
 
@@ -52,7 +52,7 @@ let userLogin = async (req, res) => {
 		}
 
 		if (!result)
-			return res.status(400).send({code: "E_INVALID_BODY", msg: "passwords don't identity"});
+			return res.status(403).send({code: "E_NOT_ACCESS", msg: "passwords don't match"});
 
 		let {ACCOUNT_HASHED_PASSWORD, ...userPayload} = user._doc;
 

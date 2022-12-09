@@ -1,11 +1,12 @@
 const {Router} = require("express");
 
 const {sendEmailVerifyLink} = require("./sendEmailVerifyLink");
-const {emailRestore} = require("./user/sendEmailsRestoreLink");
+const {emailRestoreLink} = require("./user/sendEmailsRestoreLink");
 const {updateUsername} = require("./user/userUpdateUsername");
 const {userGetUpvotes} = require("./user/userGetUpvotes");
 const {userCancelUpvote} = require("./userCancelUpvote");
 const {refreshUserToken} = require("./userTokenRefresh");
+const {emailRestore} = require("./user/emailRestoring");
 const {emailVerifing} = require("./emailVerifing");
 const {deleteUser} = require("./user/userDelete");
 const {getUserById} = require("./userGetById");
@@ -32,6 +33,9 @@ userRoutes
 	.put("/user/username/update", singInCheckMiddleware, updateUsername);
 
 userRoutes
+	.put("/user/email/restore", emailRestore);
+
+userRoutes
 	.delete("/userdelete", adminSingedIn, deleteUsers);
 
 userRoutes
@@ -41,7 +45,7 @@ userRoutes
 	.get("/user/verifyEmailLink", sendEmailVerifyLink);
 
 userRoutes
-	.get("/user/restoreEmailLink", emailRestore);
+	.get("/user/restoreEmailLink", emailRestoreLink);
 
 userRoutes
 	.get("/user/email/verify",  emailVerifing);

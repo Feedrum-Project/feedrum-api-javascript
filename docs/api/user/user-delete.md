@@ -4,10 +4,11 @@
 
 Authentication: `true`
 
-Queries: ```json
+Queries: 
+```json
 {
 	"query_parameters": {
-		`agree`: "Boolean",
+		"agree": "Boolean",
 		"deletePosts": "Boolean",
 		"deleteCommentaries": "Boolean"
 	}
@@ -20,10 +21,11 @@ Body: `none`
 
 Results: 
 - Headers: `none`
-- Body: ```json
+- Body: 
+```json
 	{
-		status: "ok", 
-		msg: "you account was delete succesfully", 
-		result: "Array(Mongoose.DeleteDocument.Aknowledges)" // a fictional type who speaks for himself
+		"status": "ok", 
+		"msg": "you account was delete succesfully", 
+		"result": "Array(Mongoose.DeleteDocument.Aknowledges)" // a fictional type who speaks for himself
 	}
 ```

@@ -1,3 +1,5 @@
+// DEPRECATED
+
 module.exports = {
 	1: "SENIOR_ADMIN"
 	2: "ADMIN",

@@ -8,7 +8,8 @@ Queries: `none`
 
 Params: `none`
 
-Body: ```json
+Body: 
+```json
 {
 	"POST_HEADER": "API.Models.PostsModel.Schema.POST_HEADER",
 	"POST_BODY": "API.Models.PostsModel.Schema.POST_BODY"
@@ -17,7 +18,8 @@ Body: ```json
 
 Results: 
 - Headers: `none`
-- Body: ```json
+- Body: 
+```json
 {
 	"status": "ok",
 	"msg": "post created succesfully",

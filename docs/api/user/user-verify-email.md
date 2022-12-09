@@ -4,7 +4,8 @@
 
 Authentication: `none`
 
-Queries: ```json
+Queries: 
+```json
 {
 	"query_parameters": {
 		"id": "Mongoose.Types.ObjectId",

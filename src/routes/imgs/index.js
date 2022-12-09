@@ -13,6 +13,6 @@ imgRouter.use("/", static(`${os.homedir()}${process.env.IMG_PATH}`));
 
 imgRouter.post("/upload", singInCheckMiddleware, imageUpload.array("image", 15) ,uploadImages);
 
-imgRouter.delete("/delete/:id", singInCheckMiddleware, deleteImg);
+imgRouter.delete("/delete/", singInCheckMiddleware, deleteImg);
 
 module.exports = imgRouter

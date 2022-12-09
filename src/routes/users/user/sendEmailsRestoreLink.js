@@ -1,13 +1,20 @@
+const bcrypt = require("bcrypt");
+
 const {UserModel, VerifyTokenModel} = require("../../../models");
 const {validId} = require("../../../utils").validations;
 const {emailTransporter} = require("../../../utils");
 
 let sendEmailRestoreLink = async (req, res) => {
-	let {decoded, ...body} = req.body;
+	let body = req.body;
 
 	if (!body.ACCOUNT_ID
 		|| !validId(body.ACCOUNT_ID))
 		return res.status(400).send({code: "E_INVALID_BODY", msg: "user id is invalid"});
+
+	if (!body.ACCOUNT_PASSWORD
+		|| typeof body.ACCOUNT_PASSWORD != 'string'
+		|| body.ACCOUNT_PASSWORD == "")
+		return res.status(400).send({code: "E_INVALID_BODY", msg: "password is invalid"});
 
 	let user, verifyToken;
 
@@ -21,8 +28,6 @@ let sendEmailRestoreLink = async (req, res) => {
 
 	if (!user && !verifyToken)
 		return res.status(404).send({code: "E_NOT_EXIST", msg: "user with this id not exist"});
-
-	delete user._doc.ACCOUNT_HASHED_PASSWORD;
 
 
 	let verifyLink = `${process.env.DEFAULT_APP_LINK}/users/user/email/restore?id=${body.ACCOUNT_ID}&verifyToken=${verifyToken._doc.TOKEN_VERIFY_TOKEN}`
@@ -40,22 +45,31 @@ let sendEmailRestoreLink = async (req, res) => {
 	<p>Якщо ви не робили ніяких запитів, то проігноруйте це повідомлення та повідомте в підтримку Feedrum</p>
 	`;
 
+	bcrypt.compare(body.ACCOUNT_PASSWORD, user._doc.ACCOUNT_HASHED_PASSWORD, async (err, result) => {
+		if (err) {
+			console.log(err);
+			return res.status(500).send({code: "E_SERVER_INTERNAL", msg: "cannot compare password"});
+		}
 
-	try {
-		let mail = await emailTransporter({
+		if (!result) 
+			return res.status(403).send({code: "E_NOT_ACCESS", msg: "passwords don't match"});
+
+		try {
+			let mail = await emailTransporter({
 			to: user.ACCOUNT_EMAIL, 
 			subject: "Email restore", 
 			message: messageBody
 		});
 
-	} catch (e) {
-		console.log(e);
-		return res.status(500).send({code: "E_SERVER_INTERNAL", msg: "couldn't send email"});
-	}
+		} catch (e) {
+			console.log(e);
+			return res.status(500).send({code: "E_SERVER_INTERNAL", msg: "couldn't send email"});
+		}
 
-	return res.status(200).send({status: "ok", msg: "verify link sended succesfully"});
+		return res.status(200).send({status: "ok", msg: "verify link sended succesfully"});
+	})
 }
 
 module.exports = {
-	emailRestore: sendEmailRestoreLink
+	emailRestoreLink: sendEmailRestoreLink
 }

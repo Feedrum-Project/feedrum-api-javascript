@@ -4,7 +4,8 @@
 
 Authentication: `true`
 
-Queries: ```json
+Queries: 
+```json
 {
 	"query_parameters": [{
 		"name": "id",
@@ -20,7 +21,8 @@ Body: `none`
 
 Response:
 - Headers: `none`
-- Body: ```json
+- Body: 
+```json
 {
 	"status": "ok",
 	"msg": "you upvote canceled successfull"
