@@ -1,16 +1,17 @@
 const {ImageModel} = require("../../models");
 
 let uploadImages = async (req, res) => {
-	let files = req.files;
+	let files = req.body.files;
 	let savedImages = [];
 
 	for (file of files) {
-		let {filename, path} = file;
+		let {filename} = file;
 
-		path = path.split("/").slice(4).join("/");
+		let path = '/imgs/' + filename
 
 		let image = new Image({
 			IMAGE_NAME: filename,
+			IMAGE_UPLOADED_BY: req.body.decoded._id,
 			IMAGE_PATH: path
 		});
 

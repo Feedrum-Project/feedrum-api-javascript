@@ -1,8 +1,12 @@
+// API.Routes.Posts.Commentaries.Commentary.Upvote.Cancel
+
 const {ComModel, UserModel} = require("../../models");
 const {validId} = require("../../utils").validations;
 
 let cancelUpvote = async (req, res) => {
+	// QueryParams.id - id of commentary for upvote canceling
 	let commentId = req.query["id"];
+	// Body.Decoded - instance of API.Models.UserModel; needed for users loggined
 	let {decoded} = req.body;
 
 	if (!commentId

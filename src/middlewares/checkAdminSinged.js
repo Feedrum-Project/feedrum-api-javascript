@@ -1,3 +1,5 @@
+// API.Routes.Middlewares.Admin.LoggedIn - middleware for checking admin's login
+
 const jwt = require("jsonwebtoken");
 
 const {AdminModel} = require("../models");

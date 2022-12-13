@@ -2,7 +2,7 @@
 
 # Static route for get images from server
 
-Authentication: `false`
+Authentication: `none`
 
 Queries: `none`
 

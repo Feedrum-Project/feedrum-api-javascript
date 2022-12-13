@@ -1,4 +1,8 @@
+// API.Models.Unused.AdminModel
+
 const {Schema, model, ObjectId} = require("mongoose");
+
+// API.Models.Unused.AdminModel.Schema
 
 // TODO: change all types to mongoose.Types
 

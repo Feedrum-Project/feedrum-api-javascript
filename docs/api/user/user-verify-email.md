@@ -9,7 +9,7 @@ Queries:
 {
 	"query_parameters": {
 		"id": "Mongoose.Types.ObjectId",
-		"token": "API.Models.VerifyTokenMOodel.Schema.TOKEN_VERIFY_TOKEN"
+		"token": "API.Models.Special.VerifyTokenMOodel.Schema.TOKEN_VERIFY_TOKEN"
 	}
 }
 ```

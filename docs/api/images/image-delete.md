@@ -4,7 +4,14 @@
 
 Authentication: `true`
 
-Queries: `img_id (Mongoose.Types.ObjectId)`
+Queries: 
+```json
+{
+	"query_parameters": {
+		"id": "Mongoose.Types.ObjectId"
+	}
+}
+```
 
 Params: `none`
 

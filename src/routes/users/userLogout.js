@@ -1,4 +1,8 @@
+let jwt = require("jsonwebtoken");
+
+
 let userLogout = async (req, res) => {
+
 	res.clearCookie('userTok');
 	res.clearCookie('refreshUserTok');
 

@@ -1,4 +1,8 @@
+// API.Models.ComModel
+
 const {Schema, ObjectId, model} = require("mongoose");
+
+// API.Models.ComModel.Schema
 
 // TODO: change all types to mongoose.Types
 

@@ -14,7 +14,7 @@ let deleteImg = async (req, res) => {
 	}
 
 	try {
-		image = await ImageModel.findOne({_id: id});
+		image = await ImageModel.findOne({_id: id, IMAGE_UPLOADED_BY: req.body.decoded._id});
 	} catch (e) {
 		console.log(e);
 		return res.status(500).send({code: "E_SERVER_INTERNAL", msg: "cannot get image"});

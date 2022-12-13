@@ -1,5 +1,9 @@
+// API.Models.Special.VerifyTokenModel
+
 const {Schema, model} = require("mongoose");
 const {ObjectId} = require("mongoose").Types;
+
+// API.Models.Special.VerifyTokenModel.Schema
 
 // TODO: change all types to mongoose.Types
 
