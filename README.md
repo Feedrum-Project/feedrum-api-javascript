@@ -2,7 +2,9 @@
 
 It's repository, what contains code of Feedrum's RESTful API.
 
-### this is base repo for hosting RESful API for this time
+### created by denkisil
+
+### now general repo of Feedrum API replaced to [this](https://github.com/Feedrum-Project/feedrum-next) repo
 
 
 Dependencies, used for making Feedrum API:
